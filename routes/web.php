@@ -26,14 +26,17 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [PostController::class, "index"])->name("home");
 
-
 Route::get('/ulasan/{novel}', [UlasanController::class, 'index'])->name('ulasan');
-Route::controller(PostController::class)
-    ->as("posts.")
-    ->group(function () {
-        Route::get("/posts", "index")->name("index");
-        Route::get("/post/{post:slug}", "index")->name("show");
-    });
+// Route::controller(PostController::class)
+//     ->as("posts.")
+//     ->group(function () {
+//         Route::get("/posts", "index")->name("index");
+//         Route::get("/post/{post:slug}", "index")->name("show");
+//     });
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
+
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Post Categories',

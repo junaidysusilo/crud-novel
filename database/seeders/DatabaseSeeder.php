@@ -17,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::create([
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt(12345)
+        ]);
+
         User::factory(2)->create();
 
         Category::create([
@@ -38,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Novel Sejarah',
             'slug' => 'novel-sejarah'
         ]);
+        
         Post::factory(20)->create();
     }
 }

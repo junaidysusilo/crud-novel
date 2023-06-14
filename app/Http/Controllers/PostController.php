@@ -22,11 +22,21 @@ class PostController extends Controller
             $category = User::firstWhere('username', request('author'));
             $title = ' by ' . $category->name;
         }
+        
         $post = Post::latest()->filter(request(['search', 'category'], ['author']))
             ->with(['author', "ulasan"])->paginate(9)->withQueryString();
         return view('posts', [
             "title" => "All Post" . $title,
             "posts" => $post
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+
+        return view('post', [
+            "title" => "Single Post",
+            "post" => $post
         ]);
     }
 }
